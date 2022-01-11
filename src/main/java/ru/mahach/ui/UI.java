@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class UI extends JFrame {
 
@@ -33,6 +34,8 @@ public class UI extends JFrame {
     private final List<String> currentDirectory = new ArrayList<>();
     private final DefaultListModel listModel = new DefaultListModel();
 
+    private final Logger logger = Logger.getLogger(UI.class.getName());
+
     public UI(){
         super("Проводник");
         configureControlPanel();
@@ -48,12 +51,12 @@ public class UI extends JFrame {
     private void configureWindow(){
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(true);
-
         getContentPane().add(this.catalogPanel);
         setSize(600, 600);
         setLocationRelativeTo(null);
         setVisible(true);
 
+        logger.info("Configure main frame successful");
     }
 
     private void configureCatalogPanel(){
@@ -61,6 +64,7 @@ public class UI extends JFrame {
         this.catalogPanel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
         this.catalogPanel.add(this.filesScroll, BorderLayout.CENTER);
         this.catalogPanel.add(this.controlPanel, BorderLayout.SOUTH);
+        logger.info("Configure catalog panel successful");
     }
 
     private void configureControlPanel(){
@@ -70,14 +74,18 @@ public class UI extends JFrame {
         this.controlPanel.add(this.renameFolder);
         this.controlPanel.setLayout(new GridLayout(1, 4, 5,5));
         this.controlPanel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+        logger.info("Configure control panel successful");
     }
 
     private void configureCreateNewDirectoryDialog(){
         this.createNewDirectoryDialog.add(this.createNewDirectoryPanel);
+        logger.info("Configure dialog \"Create New Directory\" successful");
+
     }
 
     private void configureFilesScroll(){
         this.filesScroll.setPreferredSize(new Dimension(400,500));
+        logger.info("Configure files scroll successful");
     }
 
 
@@ -89,6 +97,7 @@ public class UI extends JFrame {
 
     private void configureFilesList(){
         this.filesList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        logger.info("Configure files list successful");
     }
 
     private void previousFolderListeners(){
@@ -139,6 +148,8 @@ public class UI extends JFrame {
 
         clearListModelIfContainsData();
         updateFileListModelIfSelectedDirectory(selected);
+
+        logger.info("Update file list successful");
     }
 
 
@@ -195,6 +206,7 @@ public class UI extends JFrame {
         Boolean isEmpty = this.listModel.getSize() == 0;
         if(!isEmpty)
             this.listModel.clear();
+        logger.info("clear list model");
     }
 
     private void addFolderToCurrentDirectory(String directory){
@@ -202,6 +214,7 @@ public class UI extends JFrame {
             if(!"".equals(directory))
                 this.currentDirectory.add(directory);
         }
+        logger.info("Current directory: " + provideFullPath(this.currentDirectory));
     }
 
     private String provideFullPath(List<String> foldersCurrentDirectory) {

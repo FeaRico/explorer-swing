@@ -162,7 +162,7 @@ public class UI extends JFrame {
             assert rootElements != null;
             for(String element : rootElements){
                 File currentElementOfRoot = new File(currentFile.getPath(), element);
-                addElementToModelIfNotHiddenAndIsDirectory(currentElementOfRoot);
+                addElementToModelIfNotHidden(currentElementOfRoot);
             }
 
             addFolderToCurrentDirectory(selected);
@@ -173,7 +173,7 @@ public class UI extends JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    private void addElementToModelIfNotHiddenAndIsDirectory(File currentElementOfRoot){
+    private void addElementToModelIfNotHidden(File currentElementOfRoot){
         if(!currentElementOfRoot.isHidden()){
 
             if(currentElementOfRoot.isDirectory()){

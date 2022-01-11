@@ -195,18 +195,18 @@ public class UI extends JFrame {
             return new File(fullPath + selectedFile);
     }
 
-    private void addFolderToCurrentDirectory(File directory){
-        if(directory != null){
-            if(directory.isDirectory())
-                this.currentDirectory.add(directory.toString());
-        }
-    }
-
     private void clearListModelIfContainsData(){
         Boolean isEmpty = this.listModel.getSize() == 0;
         if(!isEmpty)
             this.listModel.clear();
         logger.info("clear list model");
+    }
+
+    private void addFolderToCurrentDirectory(File directory){
+        if(directory != null){
+            if(directory.isDirectory())
+                this.currentDirectory.add(directory.toString());
+        }
     }
 
     private void addFolderToCurrentDirectory(String directory){
